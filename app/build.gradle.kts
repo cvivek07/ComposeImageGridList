@@ -65,7 +65,6 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.navigation.compose)
-    testImplementation("org.testng:testng:6.9.6")
     kapt(libs.dagger.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
