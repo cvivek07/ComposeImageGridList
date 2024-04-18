@@ -19,7 +19,7 @@ https://github.com/cvivek07/ComposeImageGridList/assets/16047933/fc580571-842d-4
 8. Utilized coroutines whereever applicable.
 9. Used latest android studio Iguana for development.
 
-## Libraries and Architecture Used
+## Instructions
 
 1. clone the repository.
 2. Run the app to see the image list.
