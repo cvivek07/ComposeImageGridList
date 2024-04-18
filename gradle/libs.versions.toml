@@ -7,10 +7,13 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
-composeBom = "2023.08.00"
+composeBom = "2024.04.00"
 retrofit = "2.9.0"
 hilt = "2.48"
 navigationCompose = "2.7.7"
+coil = "2.6.0"
+appcompat = "1.6.1"
+material = "1.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,7 +36,9 @@ dagger-hilt = { group="com.google.dagger", name = "hilt-android", version.ref = 
 dagger-hilt-android-compiler = { group="com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-navigation-compose-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigationCompose" }
-
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

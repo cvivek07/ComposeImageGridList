@@ -1,7 +1,3 @@
 <resources>
-    <string name="app_name">ListApp</string>
-    <string name="detail">Post Detail</string>
-    <string name="list">My Posts</string>
-    <string name="back_button">back</string>
-    <string name="something_went_wrong">Something went wrong</string>
+    <string name="app_name">ImageLoadingApp</string>
 </resources>

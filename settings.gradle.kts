@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ListApp"
 include(":app")
- 
+include(":imageloader")

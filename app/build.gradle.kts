@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.vivekchoudhary.listapp"
+    namespace = "com.vivekchoudhary.imageloadingapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.vivekchoudhary.listapp"
+        applicationId = "com.vivekchoudhary.imageloadingapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":imageloader"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.coil)
     kapt(libs.dagger.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

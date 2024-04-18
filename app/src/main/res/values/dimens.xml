@@ -4,4 +4,6 @@
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="loader_padding">8dp</dimen>
     <dimen name="loader_width">32dp</dimen>
+    <dimen name="placeholder_width">200dp</dimen>
+    <dimen name="placeholder_height">200dp</dimen>
 </resources>
