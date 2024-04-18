@@ -48,7 +48,6 @@ fun ListScreen(viewModel: PhotosViewModel, errorResId: Int, placeholderResId: In
 
 @Composable
 fun LazyList(list: List<Photo>, errorResId: Int, placeholderResId: Int) {
-    val coroutineScope = rememberCoroutineScope()
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         verticalItemSpacing = 4.dp,
@@ -61,15 +60,11 @@ fun LazyList(list: List<Photo>, errorResId: Int, placeholderResId: Int) {
             val context = LocalContext.current
             var bitmap by remember { mutableStateOf<Bitmap?>(null) }
             LaunchedEffect(imageUrl) {
-                coroutineScope.launch {
-                    bitmap = withContext(Dispatchers.IO) {
-                        ImageRequest.Builder(context)
-                            .data(imageUrl)
-                            .error(errorResId)
-                            .placeholder(placeholderResId)
-                            .build()
-                    }
-                }
+                bitmap = ImageRequest.Builder(context)
+                    .data(imageUrl)
+                    .error(errorResId)
+                    .placeholder(placeholderResId)
+                    .build()
             }
 
             if (bitmap != null) {
