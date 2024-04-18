@@ -4,9 +4,7 @@ import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -16,23 +14,20 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.vivekchoudhary.imageloader.ImageRequest
-import com.vivekchoudhary.imageloadingapp.R
 import com.vivekchoudhary.imageloadingapp.common.DataWrapper
 import com.vivekchoudhary.imageloadingapp.repository.model.Photo
+import com.vivekchoudhary.imageloadingapp.repository.model.getAspectRatio
+import com.vivekchoudhary.imageloadingapp.repository.model.getImageUrl
 import com.vivekchoudhary.imageloadingapp.viewmodel.PhotosViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @Composable
 fun ListScreen(viewModel: PhotosViewModel, errorResId: Int, placeholderResId: Int) {
@@ -53,10 +48,12 @@ fun LazyList(list: List<Photo>, errorResId: Int, placeholderResId: Int) {
         verticalItemSpacing = 4.dp,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        items(items = list, key = {
-            it.id
-        }) { photo ->
-            val imageUrl = photo.urls.regularUrl
+        items(items = list,
+            key = {
+                it.id
+            }
+        ) { photo ->
+            val imageUrl = photo.getImageUrl()
             val context = LocalContext.current
             var bitmap by remember { mutableStateOf<Bitmap?>(null) }
             LaunchedEffect(imageUrl) {
@@ -71,7 +68,9 @@ fun LazyList(list: List<Photo>, errorResId: Int, placeholderResId: Int) {
                 Image(
                     bitmap = bitmap!!.asImageBitmap(),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxWidth()
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .aspectRatio(photo.getAspectRatio().toFloat())
                 )
             } else {
                 Image(
@@ -79,8 +78,7 @@ fun LazyList(list: List<Photo>, errorResId: Int, placeholderResId: Int) {
                     contentDescription = null,
                     modifier = Modifier
                         .background(Color.Gray)
-                        .width(dimensionResource(id = R.dimen.placeholder_width))
-                        .height(dimensionResource(id = R.dimen.placeholder_height))
+                        .aspectRatio(photo.getAspectRatio().toFloat())
                 )
             }
 

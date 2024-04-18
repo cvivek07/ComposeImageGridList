@@ -26,7 +26,11 @@ data class Photo(
     @SerializedName("id")
     val id: String,
     @SerializedName("urls")
-    val urls: Urls
+    val urls: Urls,
+    @SerializedName("width")
+    val width: Int,
+    @SerializedName("height")
+    val height: Int
 )
 
 @Stable
@@ -35,3 +39,16 @@ data class Urls(
     @SerializedName("regular")
     val regularUrl: String
 )
+
+fun Photo.getImageUrl() : String {
+   return this.urls.regularUrl
+}
+
+fun Photo.getAspectRatio() : Int {
+    val width = this.width
+    val height = this.height
+    if(width > height) {
+        return width/height
+    }
+    return height/width
+}
