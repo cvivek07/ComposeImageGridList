@@ -24,3 +24,56 @@ https://github.com/cvivek07/ComposeImageGridList/assets/16047933/fc580571-842d-4
 1. clone the repository.
 2. Run the app to see the image list.
 
+## Usage
+
+## Usage
+
+```kotlin
+@Composable
+fun LazyList(list: List<Photo>, errorResId: Int, placeholderResId: Int) {
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Fixed(2),
+        verticalItemSpacing = 4.dp,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        items(items = list,
+            key = {
+                it.id
+            }
+        ) { photo ->
+            val imageUrl = photo.getImageUrl()
+            val context = LocalContext.current
+            var bitmap by remember { mutableStateOf<Bitmap?>(null) }
+            LaunchedEffect(imageUrl) {
+                bitmap = ImageRequest.Builder(context)
+                    .data(imageUrl)
+                    .error(errorResId)
+                    .placeholder(placeholderResId)
+                    .build()
+            }
+            if (bitmap != null) {
+                Image(
+                    bitmap = bitmap!!.asImageBitmap(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .aspectRatio(photo.getAspectRatio().toFloat())
+                )
+            } else {
+                Image(
+                    painter = painterResource(id = placeholderResId),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .background(Color.Gray)
+                        .aspectRatio(
+                            photo
+                                .getAspectRatio()
+                                .toFloat()
+                        )
+                )
+            }
+        }
+    }
+}
+```
+
